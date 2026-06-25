@@ -24,7 +24,9 @@ import type { Readable } from 'stream';
 
 import { getBinaryResponse } from './utils/binary';
 import { configuredOutputs } from './utils/outputs';
-import { formatPrivateKey, generatePairedItemData } from '../../utils/utilities';
+import { formatPemBlock } from '@n8n/utils';
+
+import { generatePairedItemData } from '../../utils/utilities';
 
 const respondWithProperty: INodeProperties = {
 	displayName: 'Respond With',
@@ -450,7 +452,7 @@ export class RespondToWebhook implements INodeType {
 					if (keyType === 'passphrase') {
 						secretOrPrivateKey = secret;
 					} else {
-						secretOrPrivateKey = formatPrivateKey(privateKey);
+						secretOrPrivateKey = formatPemBlock(privateKey);
 					}
 					const payload = this.getNodeParameter('payload', 0, {}) as IDataObject;
 					const token = jwt.sign(payload, secretOrPrivateKey, { algorithm });

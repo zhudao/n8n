@@ -15,7 +15,7 @@ import type {
 	IMongoCredentialsType,
 	IMongoParametricCredentials,
 } from './mongoDb.types';
-import { formatPrivateKey } from '../../utils/utilities';
+import { formatPemBlock } from '@n8n/utils';
 
 /**
  * Standard way of building the MongoDB connection string, unless overridden with a provided string
@@ -196,9 +196,9 @@ export async function connectMongoClient(
 	};
 
 	if (credentials.tls) {
-		const ca = credentials.ca ? formatPrivateKey(credentials.ca as string) : undefined;
-		const cert = credentials.cert ? formatPrivateKey(credentials.cert as string) : undefined;
-		const key = credentials.key ? formatPrivateKey(credentials.key as string) : undefined;
+		const ca = credentials.ca ? formatPemBlock(credentials.ca as string) : undefined;
+		const cert = credentials.cert ? formatPemBlock(credentials.cert as string) : undefined;
+		const key = credentials.key ? formatPemBlock(credentials.key as string) : undefined;
 		const passphrase = (credentials.passphrase as string) || undefined;
 
 		const secureContext = createSecureContext({

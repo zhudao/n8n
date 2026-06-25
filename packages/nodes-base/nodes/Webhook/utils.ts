@@ -15,7 +15,7 @@ import { createHmac, timingSafeEqual } from 'node:crypto';
 import { BlockList, isIPv6 } from 'node:net';
 
 import { WebhookAuthorizationError } from './error';
-import { formatPrivateKey } from '../../utils/utilities';
+import { formatPemBlock } from '@n8n/utils';
 
 export type WebhookParameters = {
 	httpMethod: string | string[];
@@ -342,7 +342,7 @@ export async function validateWebhookAuthentication(
 		if (expectedAuth.keyType === 'passphrase') {
 			secretOrPublicKey = expectedAuth.secret;
 		} else {
-			secretOrPublicKey = formatPrivateKey(expectedAuth.publicKey, true);
+			secretOrPublicKey = formatPemBlock(expectedAuth.publicKey, true);
 		}
 
 		try {

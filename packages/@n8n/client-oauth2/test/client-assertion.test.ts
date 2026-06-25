@@ -1,4 +1,4 @@
-import { formatPrivateKey } from '@n8n/utils';
+import { formatPemBlock } from '@n8n/utils';
 import { createVerify, X509Certificate } from 'node:crypto';
 
 import { buildClientAssertion } from '@/client-assertion';
@@ -10,7 +10,7 @@ function decodeSegment(segment: string) {
 }
 
 function expectedThumbprint(): string {
-	const fingerprint = new X509Certificate(formatPrivateKey(config.certificate)).fingerprint;
+	const fingerprint = new X509Certificate(formatPemBlock(config.certificate)).fingerprint;
 	return Buffer.from(fingerprint.replace(/:/g, ''), 'hex').toString('base64url');
 }
 
@@ -39,7 +39,7 @@ describe('buildClientAssertion', () => {
 		const verified = createVerify('RSA-SHA256')
 			.update(`${headerSeg}.${payloadSeg}`)
 			.verify(
-				new X509Certificate(formatPrivateKey(config.certificate)).publicKey,
+				new X509Certificate(formatPemBlock(config.certificate)).publicKey,
 				Buffer.from(signatureSeg, 'base64url'),
 			);
 		expect(verified).toBe(true);

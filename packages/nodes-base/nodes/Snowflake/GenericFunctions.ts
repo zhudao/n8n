@@ -2,7 +2,7 @@ import { createPrivateKey } from 'crypto';
 import pick from 'lodash/pick';
 import type snowflake from 'snowflake-sdk';
 
-import { formatPrivateKey } from '@utils/utilities';
+import { formatPemBlock } from '@n8n/utils';
 
 const commonConnectionFields = [
 	'account',
@@ -36,7 +36,7 @@ export type SnowflakeCredential = Pick<
 	);
 
 const extractPrivateKey = (credential: { privateKey: string; passphrase?: string }) => {
-	const key = formatPrivateKey(credential.privateKey);
+	const key = formatPemBlock(credential.privateKey);
 
 	if (!credential.passphrase) return key;
 

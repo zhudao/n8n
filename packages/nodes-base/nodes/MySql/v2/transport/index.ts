@@ -8,7 +8,7 @@ import type {
 import { createServer, type AddressInfo } from 'node:net';
 
 import { LOCALHOST } from '@utils/constants';
-import { formatPrivateKey } from '@utils/utilities';
+import { formatPemBlock } from '@n8n/utils';
 
 import type { Mysql2Pool, MysqlNodeCredentials } from '../helpers/interfaces';
 
@@ -32,12 +32,12 @@ export async function createPool(
 		connectionOptions.ssl = {};
 
 		if (credentials.caCertificate) {
-			connectionOptions.ssl.ca = formatPrivateKey(credentials.caCertificate);
+			connectionOptions.ssl.ca = formatPemBlock(credentials.caCertificate);
 		}
 
 		if (credentials.clientCertificate || credentials.clientPrivateKey) {
-			connectionOptions.ssl.cert = formatPrivateKey(credentials.clientCertificate);
-			connectionOptions.ssl.key = formatPrivateKey(credentials.clientPrivateKey);
+			connectionOptions.ssl.cert = formatPemBlock(credentials.clientCertificate);
+			connectionOptions.ssl.key = formatPemBlock(credentials.clientPrivateKey);
 		}
 	}
 
@@ -65,7 +65,7 @@ export async function createPool(
 		return mysql2.createPool(connectionOptions);
 	} else {
 		if (credentials.sshAuthenticateWith === 'privateKey' && credentials.privateKey) {
-			credentials.privateKey = formatPrivateKey(credentials.privateKey);
+			credentials.privateKey = formatPemBlock(credentials.privateKey);
 		}
 		const sshClient = await this.helpers.getSSHClient(credentials);
 

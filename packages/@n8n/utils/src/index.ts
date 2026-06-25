@@ -12,7 +12,7 @@ export * from './files/sanitize';
 export * from './files/path';
 export * from './placeholder';
 export * from './jwt';
-export * from './format-private-key';
+export * from './format-pem-block';
 export * from './scrub-secrets';
 export type * from './types';
 export * from './validation';

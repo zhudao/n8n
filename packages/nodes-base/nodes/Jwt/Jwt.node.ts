@@ -8,7 +8,7 @@ import type {
 } from 'n8n-workflow';
 import { NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 
-import { formatPrivateKey } from '../../utils/utilities';
+import { formatPemBlock } from '@n8n/utils';
 import { parseJsonParameter } from '../Set/v2/helpers/utils';
 
 const prettifyOperation = (operation: string) => {
@@ -405,7 +405,7 @@ export class Jwt implements INodeType {
 					if (credentials.keyType === 'passphrase') {
 						secretOrPrivateKey = credentials.secret;
 					} else {
-						secretOrPrivateKey = formatPrivateKey(credentials.privateKey);
+						secretOrPrivateKey = formatPemBlock(credentials.privateKey);
 					}
 
 					const algorithm = options.algorithm ?? credentials.algorithm;
@@ -442,7 +442,7 @@ export class Jwt implements INodeType {
 					if (credentials.keyType === 'passphrase') {
 						secretOrPublicKey = credentials.secret;
 					} else {
-						secretOrPublicKey = formatPrivateKey(credentials.publicKey, true);
+						secretOrPublicKey = formatPemBlock(credentials.publicKey, true);
 					}
 
 					const { ignoreExpiration, ignoreNotBefore, clockTolerance, complete } = options;

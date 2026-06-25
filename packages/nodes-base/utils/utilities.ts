@@ -15,8 +15,6 @@ import type {
 } from 'n8n-workflow';
 import { jsonParse, MYSQL_NODE_TYPE, POSTGRES_NODE_TYPE, randomInt, UserError } from 'n8n-workflow';
 
-export { formatPrivateKey } from '@n8n/utils';
-
 /**
  * Creates an array of elements split into groups the length of `size`.
  * If `array` can't be split evenly, the final chunk will be the remaining

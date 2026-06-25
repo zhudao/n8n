@@ -1,4 +1,4 @@
-import { formatPrivateKey } from '@n8n/utils';
+import { formatPemBlock } from '@n8n/utils';
 import { createSign, randomUUID, X509Certificate } from 'node:crypto';
 
 // private_key_jwt (RFC 7521/7523): the client proves its identity with a JWT
@@ -13,8 +13,7 @@ function base64url(input: Buffer | string): string {
 }
 
 function certificateThumbprint(certificate: string): string {
-	// `formatPrivateKey` also normalizes CERTIFICATE PEMs despite the name.
-	const fingerprint = new X509Certificate(formatPrivateKey(certificate)).fingerprint;
+	const fingerprint = new X509Certificate(formatPemBlock(certificate)).fingerprint;
 	return Buffer.from(fingerprint.replace(/:/g, ''), 'hex').toString('base64url');
 }
 
@@ -42,6 +41,6 @@ export function buildClientAssertion(options: BuildClientAssertionOptions): stri
 	const signingInput = `${base64url(JSON.stringify(header))}.${base64url(JSON.stringify(payload))}`;
 	const signature = createSign('RSA-SHA256')
 		.update(signingInput)
-		.sign(formatPrivateKey(options.privateKey));
+		.sign(formatPemBlock(options.privateKey));
 	return `${signingInput}.${base64url(signature)}`;
 }
