@@ -1,3 +1,4 @@
+import { formatPemBlock } from '@n8n/utils';
 import basicAuth from 'basic-auth';
 import { rm } from 'fs/promises';
 import jwt from 'jsonwebtoken';
@@ -15,7 +16,6 @@ import { createHmac, timingSafeEqual } from 'node:crypto';
 import { BlockList, isIPv6 } from 'node:net';
 
 import { WebhookAuthorizationError } from './error';
-import { formatPemBlock } from '@n8n/utils';
 
 export type WebhookParameters = {
 	httpMethod: string | string[];

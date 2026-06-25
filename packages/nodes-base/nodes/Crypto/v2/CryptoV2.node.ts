@@ -1,3 +1,4 @@
+import { formatPemBlock } from '@n8n/utils';
 import type { BinaryToTextEncoding, CipherGCMTypes } from 'crypto';
 import {
 	constants,
@@ -24,8 +25,6 @@ import type {
 import { deepCopy, BINARY_ENCODING, NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 import { pipeline } from 'stream/promises';
 import { v4 as uuid } from 'uuid';
-
-import { formatPemBlock } from '@n8n/utils';
 
 const unsupportedAlgorithms = [
 	'RSA-MD4',

@@ -1,3 +1,4 @@
+import { formatPemBlock } from '@n8n/utils';
 import { writeFile } from 'fs/promises';
 import type {
 	ICredentialTestFunctions,
@@ -19,8 +20,6 @@ import type { Config } from 'node-ssh';
 import { NodeSSH } from 'node-ssh';
 import type { Readable } from 'stream';
 import { file as tmpFile } from 'tmp-promise';
-
-import { formatPemBlock } from '@n8n/utils';
 
 async function resolveHomeDir(
 	this: IExecuteFunctions,

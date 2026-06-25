@@ -1,3 +1,4 @@
+import { formatPemBlock } from '@n8n/utils';
 import jwt from 'jsonwebtoken';
 import moment from 'moment-timezone';
 import type {
@@ -9,8 +10,6 @@ import type {
 	INodeProperties,
 } from 'n8n-workflow';
 import { OperationalError } from 'n8n-workflow';
-
-import { formatPemBlock } from '@n8n/utils';
 
 import { getTokenRequestClient, TOKEN_REQUEST_TIMEOUT } from './common/token-request';
 

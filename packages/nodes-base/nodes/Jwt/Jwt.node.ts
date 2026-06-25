@@ -1,3 +1,4 @@
+import { formatPemBlock } from '@n8n/utils';
 import jwt from 'jsonwebtoken';
 import type {
 	IDataObject,
@@ -8,7 +9,6 @@ import type {
 } from 'n8n-workflow';
 import { NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 
-import { formatPemBlock } from '@n8n/utils';
 import { parseJsonParameter } from '../Set/v2/helpers/utils';
 
 const prettifyOperation = (operation: string) => {

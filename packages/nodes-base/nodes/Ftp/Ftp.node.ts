@@ -1,3 +1,5 @@
+import { formatPemBlock } from '@n8n/utils';
+import { generatePairedItemData } from '@utils/utilities';
 import { createWriteStream } from 'fs';
 import { BINARY_ENCODING, NodeApiError, NodeConnectionTypes } from 'n8n-workflow';
 import type {
@@ -19,10 +21,6 @@ import sftpClient from 'ssh2-sftp-client';
 import type { Readable } from 'stream';
 import { pipeline } from 'stream/promises';
 import { file as tmpFile } from 'tmp-promise';
-
-import { formatPemBlock } from '@n8n/utils';
-
-import { generatePairedItemData } from '@utils/utilities';
 
 interface ReturnFtpItem {
 	type: string;

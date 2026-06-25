@@ -1,6 +1,6 @@
+import { formatPemBlock } from '@n8n/utils';
 import FormData from 'form-data';
 import get from 'lodash/get';
-import type { Readable } from 'stream';
 import isPlainObject from 'lodash/isPlainObject';
 import set from 'lodash/set';
 import {
@@ -13,10 +13,10 @@ import {
 	type IOAuth2Options,
 	type IRequestOptions,
 } from 'n8n-workflow';
+import type { Readable } from 'stream';
 import type { SecureContextOptions } from 'tls';
 
 import type { HttpSslAuthCredentials } from './interfaces';
-import { formatPemBlock } from '@n8n/utils';
 
 export type BodyParameter = {
 	name: string;

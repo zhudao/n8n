@@ -1,3 +1,4 @@
+import { formatPemBlock } from '@n8n/utils';
 import jwt from 'jsonwebtoken';
 import set from 'lodash/set';
 import type {
@@ -24,8 +25,6 @@ import type { Readable } from 'stream';
 
 import { getBinaryResponse } from './utils/binary';
 import { configuredOutputs } from './utils/outputs';
-import { formatPemBlock } from '@n8n/utils';
-
 import { generatePairedItemData } from '../../utils/utilities';
 
 const respondWithProperty: INodeProperties = {

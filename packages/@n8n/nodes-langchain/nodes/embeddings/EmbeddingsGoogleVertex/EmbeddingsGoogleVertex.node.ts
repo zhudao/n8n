@@ -1,5 +1,6 @@
 import { ProjectsClient } from '@google-cloud/resource-manager';
 import { VertexAIEmbeddings } from '@langchain/google-vertexai';
+import { logWrapper, getConnectionHintNoticeField } from '@n8n/ai-utilities';
 import { formatPemBlock } from '@n8n/utils';
 import { NodeConnectionTypes } from 'n8n-workflow';
 import type {
@@ -9,8 +10,6 @@ import type {
 	ISupplyDataFunctions,
 	SupplyData,
 } from 'n8n-workflow';
-
-import { logWrapper, getConnectionHintNoticeField } from '@n8n/ai-utilities';
 
 export class EmbeddingsGoogleVertex implements INodeType {
 	methods = {

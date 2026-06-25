@@ -1,8 +1,7 @@
+import { formatPemBlock } from '@n8n/utils';
 import { createPrivateKey } from 'crypto';
 import pick from 'lodash/pick';
 import type snowflake from 'snowflake-sdk';
-
-import { formatPemBlock } from '@n8n/utils';
 
 const commonConnectionFields = [
 	'account',

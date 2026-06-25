@@ -1,3 +1,4 @@
+import { formatPemBlock } from '@n8n/utils';
 import get from 'lodash/get';
 import set from 'lodash/set';
 import { MongoClient, ObjectId } from 'mongodb';
@@ -15,7 +16,6 @@ import type {
 	IMongoCredentialsType,
 	IMongoParametricCredentials,
 } from './mongoDb.types';
-import { formatPemBlock } from '@n8n/utils';
 
 /**
  * Standard way of building the MongoDB connection string, unless overridden with a provided string

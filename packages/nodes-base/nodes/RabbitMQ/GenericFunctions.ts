@@ -1,3 +1,4 @@
+import { formatPemBlock } from '@n8n/utils';
 import * as amqplib from 'amqplib';
 import type {
 	IDeferredPromise,
@@ -9,8 +10,6 @@ import type {
 	ITriggerFunctions,
 } from 'n8n-workflow';
 import { jsonParse, sleep } from 'n8n-workflow';
-
-import { formatPemBlock } from '@n8n/utils';
 
 import type { ExchangeType, Options, RabbitMQCredentials, TriggerOptions } from './types';
 

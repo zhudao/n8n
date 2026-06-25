@@ -1,3 +1,5 @@
+import { formatPemBlock } from '@n8n/utils';
+import { LOCALHOST } from '@utils/constants';
 import mysql2 from 'mysql2/promise';
 import type {
 	ICredentialTestFunctions,
@@ -6,9 +8,6 @@ import type {
 	ILoadOptionsFunctions,
 } from 'n8n-workflow';
 import { createServer, type AddressInfo } from 'node:net';
-
-import { LOCALHOST } from '@utils/constants';
-import { formatPemBlock } from '@n8n/utils';
 
 import type { Mysql2Pool, MysqlNodeCredentials } from '../helpers/interfaces';
 
