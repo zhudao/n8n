@@ -239,11 +239,16 @@ export async function cleanupBuild(
 		}
 	}
 
-	// Last, and only once the rest is gone: the user's delete takes its project, so a
-	// retry of a failed delete needs the project to still exist.
-	if (build.buildUserId && clean) {
+	// Last, and only once the rest is gone: a retry of a failed delete needs the
+	// project to still exist. A member's delete takes their personal project; a team
+	// build project (no user) is deleted directly.
+	if (build.buildProjectId && clean) {
 		try {
-			await client.deleteUser(build.buildUserId);
+			if (build.buildUserId) {
+				await client.deleteUser(build.buildUserId);
+			} else {
+				await client.deleteProject(build.buildProjectId);
+			}
 		} catch (error: unknown) {
 			if (!(error instanceof N8nApiError && error.status === 404)) clean = false;
 		}
@@ -284,7 +289,7 @@ export async function runWorkflowChecks(args: {
 	workflow: WorkflowResponse | undefined;
 	prompt: string;
 	agentText: string | undefined;
-	/** Per-live-turn failed build-workflow attempt counts; feeds the efficiency check. */
+	/** Per-live-turn failed workflow_builder_build_workflow attempt counts; feeds the efficiency check. */
 	failedBuildsPerTurn?: number[];
 	logger: EvalLogger;
 }): Promise<CheckOutcome[] | undefined> {

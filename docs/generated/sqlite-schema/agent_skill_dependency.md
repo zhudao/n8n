@@ -61,8 +61,10 @@ erDiagram
   TEXT integrations
   varchar_128_ name
   varchar_255_ projectId FK
+  INTEGER publicationRevision
   INTEGER revision
   TEXT schema
+  varchar_16_ scope
   datetime_3_ setupCompletedAt
   TEXT skills
   TEXT tools
@@ -71,6 +73,8 @@ erDiagram
 }
 "skill" {
   varchar_36_ agentId FK
+  boolean availableToAssistant
+  boolean availableToMCP
   datetime_3_ createdAt
   varchar createdById FK
   varchar_36_ id PK
@@ -88,6 +92,7 @@ erDiagram
   TEXT instructions
   varchar_128_ name
   varchar_36_ skillId FK
+  varchar_255_ sourceRevision
   datetime_3_ updatedAt
   INTEGER version
 }
